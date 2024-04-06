@@ -6,7 +6,7 @@ import AddTodo from "./components/AddToDo";
 import { ToDoItem } from "./types";
 import { getToDos, addToDoItem, deleteToDoItem } from "./Api";
 
-const App: React.FC = () => {
+const ToDoListPage: React.FC = () => {
   const [todos, setTodos] = useState<ToDoItem[]>([]);
   console.log("todos", todos);
 
@@ -53,9 +53,30 @@ const App: React.FC = () => {
   };
 
   return (
-    <main className="App">
-      <h1>My To Do List</h1>
-      <AddTodo saveTodo={handleSaveTodo} />
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        background: "#EEF5DB",
+        padding: "1rem",
+        height: "100%",
+      }}
+    >
+      <h1
+        style={{
+          fontSize: "1.5rem",
+        }}
+      >
+        My To Do List
+      </h1>
+      <div
+        style={{
+          padding: "1rem 0 0 0",
+        }}
+      >
+        <AddTodo saveTodo={handleSaveTodo} />
+      </div>
+
       {todos.map((todo: ToDoItem) => (
         <ToDoListItem
           key={todo._id}
@@ -63,8 +84,8 @@ const App: React.FC = () => {
           todo={todo}
         />
       ))}
-    </main>
+    </div>
   );
 };
 
-export default App;
+export default ToDoListPage;
