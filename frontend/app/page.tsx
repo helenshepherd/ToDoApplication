@@ -1,8 +1,8 @@
 "use client";
-
+import React from "react";
 import ToDoListPage from "./toDoList/ToDoListPage";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <main
       style={{
