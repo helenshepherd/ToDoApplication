@@ -32,6 +32,7 @@ console.log("allTodos", allTodos)
    }
 })
 
+
 router.route('/delete/:id').delete(async(req,res)=>{
     try {
         const deletedTodo = await ToDoItem.findByIdAndDelete(
@@ -39,9 +40,9 @@ router.route('/delete/:id').delete(async(req,res)=>{
         )
         const allToDoItems = await ToDoItem.find()
         res.status(200).json({
-            message: 'To do item deleted',
-            deletedToToItem: deletedTodo,
-            toDoItems: allToDoItems,
+            message: "To do item deleted",
+            status: 200,
+            todos: allToDoItems,
         })
     } catch(error){
      console.log(error)

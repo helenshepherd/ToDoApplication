@@ -38,15 +38,18 @@ const App: React.FC = () => {
     }
   };
 
-  const handleDeleteTodo = (_id: string): void => {
-    deleteToDoItem(_id)
-      .then(({ status, data }) => {
-        if (status !== 200) {
-          throw new Error("Error! Todo not deleted");
-        }
-        setTodos(data.todos);
-      })
-      .catch((err) => console.log(err));
+  const handleDeleteTodo = async (_id: string): Promise<void> => {
+    try {
+      const response = await deleteToDoItem(_id);
+      console.log("delete response", response);
+      const { status, data } = response;
+      if (status !== 200) {
+        throw new Error("Error! To do not deleted");
+      }
+      setTodos(response.data.todos);
+    } catch (err) {
+      () => console.log(err);
+    }
   };
 
   return (
