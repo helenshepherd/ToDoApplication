@@ -18,3 +18,14 @@ export type ApiDataType = {
   todos: ToDoItem[];
   todo?: ToDoItem;
 };
+
+export interface BasketItem {
+  _id: string;
+  itemName: string;
+  price: number;
+  quantity: number;
+}
+
+export type BasketItemProps = {
+  basketItem: BasketItem;
+};

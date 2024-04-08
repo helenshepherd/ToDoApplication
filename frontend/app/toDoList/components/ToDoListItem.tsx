@@ -1,12 +1,14 @@
 "use client";
 import React from "react";
-import { ToDoItem, ToDoProps } from "../types";
+import { ToDoItem, ToDoProps, BasketItem, BasketItemProps } from "../types";
 
-type Props = ToDoProps & {
-  deleteTodo: (_id: string) => void;
+type Props = BasketItemProps & {
+  deleteBasketItem: (_id: string) => void;
 };
 
-const ToDoListItem: React.FC<Props> = ({ todo, deleteTodo }) => {
+const ToDoListItem: React.FC<Props> = ({ basketItem, deleteBasketItem }) => {
+  const subtotal: number = basketItem.price * basketItem.quantity;
+
   return (
     <div
       className="Card"
@@ -20,7 +22,27 @@ const ToDoListItem: React.FC<Props> = ({ todo, deleteTodo }) => {
       }}
     >
       <div>
-        <h1>{todo.content}</h1>
+        <h1>{basketItem.itemName}</h1>
+      </div>
+      <div>
+        <h1>{`${basketItem.price}`}</h1>
+      </div>
+      <div>
+        <select>
+          <option value="0">Select quantity:</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+      </div>
+      <div>
+        <h1>{`${basketItem.price}`}</h1>
+      </div>
+      <div>
+        <h1>{`${subtotal}`}</h1>
       </div>
       <div>
         <button
@@ -29,7 +51,7 @@ const ToDoListItem: React.FC<Props> = ({ todo, deleteTodo }) => {
             background: "#FE5F55",
             padding: "0.5rem",
           }}
-          onClick={() => deleteTodo(todo._id)}
+          onClick={() => deleteBasketItem(basketItem._id)}
         >
           Delete
         </button>

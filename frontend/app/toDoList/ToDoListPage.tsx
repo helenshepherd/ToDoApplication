@@ -80,7 +80,7 @@ const ToDoListPage: React.FC = () => {
       {todos.map((todo: ToDoItem) => (
         <ToDoListItem
           key={todo._id}
-          deleteTodo={handleDeleteTodo}
+          deleteBasketItem={handleDeleteTodo}
           todo={todo}
         />
       ))}

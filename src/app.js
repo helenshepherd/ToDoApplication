@@ -2,6 +2,8 @@ const express = require('express')
 const cors = require('cors')
 const  userRoutes = require('./routes/user.routes')
 const  toDoItemRoutes = require('./routes/toDoItem.routes')
+const  basketRoutes = require('./routes/basket.routes')
+
 
 const app = express()
 //ADDING COMMENT
@@ -19,6 +21,8 @@ app.get('/',(req,res)=>{
 
 app.use('/user', userRoutes)
 app.use('/toDoItem', toDoItemRoutes)
+app.use('/basket', basketRoutes)
+
 
 module.exports = app
 
