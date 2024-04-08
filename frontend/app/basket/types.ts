@@ -15,17 +15,21 @@ export type ToDoProps = {
 export type ApiDataType = {
   message: string;
   status: string;
-  todos: ToDoItem[];
-  todo?: ToDoItem;
+  basket: {
+    _id: String;
+    id: String;
+    items: BasketItem[];
+  };
 };
 
 export interface BasketItem {
-  _id: string;
+  id: string;
   itemName: string;
   price: number;
   quantity: number;
 }
 
 export type BasketItemProps = {
+  basketId: String;
   basketItem: BasketItem;
 };

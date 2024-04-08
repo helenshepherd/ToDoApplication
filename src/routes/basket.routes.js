@@ -60,23 +60,32 @@ router.route('/basket/:id/item/:itemId').put(async(req,res)=>{
  })
 
  router.route('/basket/:id/item/:itemId').delete(async(req,res)=>{
-    try {
-        const basket = await Basket.findById(
-            req.params.id
-        )
-        res.status(200).json({ todos })
-    } catch(error){
-     console.log(error)
-       if(error.status){
-         res.status(400).json(buildErrorResponse(error))
-       }else{
-         res.status(400).json(buildErrorResponse({
-             status : 500,
-             message:"Server error"
-         }))
-       }
+  console.log("ROUTER")
+  try {
+      const basket = await Basket.findById(
+          req.params.id
+      );
+      if (!basket) {
+        return res.status(404).json({ message: "Basket not found" });
     }
- })
+      const updatedBasketItems = basket.items.filter(item => {
+        return item.id !== req.params.itemId
+      });
+      console.log("updatedBasketItems routes", updatedBasketItems)
+      basket.items = updatedBasketItems;
+      await basket.save();
+      res.status(200).json({ basket });
+  } catch(error){
+     if(error.status){
+       res.status(400).json(buildErrorResponse(error))
+     }else{
+       res.status(400).json(buildErrorResponse({
+           status : 500,
+           message:"Server error"
+       }))
+     }
+  }
+})
 
 
 module.exports = router

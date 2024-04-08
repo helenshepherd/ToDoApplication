@@ -1,14 +1,21 @@
 "use client";
 import React from "react";
-import { ToDoItem, ToDoProps, BasketItem, BasketItemProps } from "../types";
+import { BasketItemProps } from "../types";
 
 type Props = BasketItemProps & {
-  deleteBasketItem: (_id: string) => void;
+  deleteBasketItem: (_id: String, id: String) => void;
+  updateQuantity: (_id: String, id: String, quantity: Number) => void;
 };
 
-const ToDoListItem: React.FC<Props> = ({ basketItem, deleteBasketItem }) => {
-  const subtotal: number = basketItem.price * basketItem.quantity;
+const BasketItemFE: React.FC<Props> = ({
+  basketId,
+  basketItem,
+  deleteBasketItem,
+  updateQuantity,
+}) => {
+  const subtotal: Number = basketItem.price * basketItem.quantity;
 
+  console.log("basketItem", basketItem);
   return (
     <div
       className="Card"
@@ -28,18 +35,18 @@ const ToDoListItem: React.FC<Props> = ({ basketItem, deleteBasketItem }) => {
         <h1>{`${basketItem.price}`}</h1>
       </div>
       <div>
-        <select>
-          <option value="0">Select quantity:</option>
+        <select
+          onChange={(e) =>
+            updateQuantity(basketId, basketItem.id, parseInt(e.target.value))
+          }
+        >
+          <option value={basketItem.quantity}>{basketItem.quantity}</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
+          <option value="4">4</option>s<option value="5">5</option>
           <option value="6">6</option>
         </select>
-      </div>
-      <div>
-        <h1>{`${basketItem.price}`}</h1>
       </div>
       <div>
         <h1>{`${subtotal}`}</h1>
@@ -51,7 +58,7 @@ const ToDoListItem: React.FC<Props> = ({ basketItem, deleteBasketItem }) => {
             background: "#FE5F55",
             padding: "0.5rem",
           }}
-          onClick={() => deleteBasketItem(basketItem._id)}
+          onClick={() => deleteBasketItem(basketId, basketItem.id)}
         >
           Delete
         </button>
@@ -60,4 +67,4 @@ const ToDoListItem: React.FC<Props> = ({ basketItem, deleteBasketItem }) => {
   );
 };
 
-export default ToDoListItem;
+export default BasketItemFE;

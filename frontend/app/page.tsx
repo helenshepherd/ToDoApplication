@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import ToDoListPage from "./toDoList/ToDoListPage";
+import BasketPage from "./basket/BasketPage";
 
 export default function HomePage() {
   return (
@@ -23,7 +23,7 @@ export default function HomePage() {
           height: "90%",
         }}
       >
-        <ToDoListPage />
+        <BasketPage basketId="66145569b692339dbd964587" />
       </div>
     </main>
   );
